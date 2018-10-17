@@ -1,2 +1,2 @@
 # refactoring
-## practice coding with test & coverage to know TDD
+## practice coding with test&coverage tools to know TDD
