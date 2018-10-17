@@ -22,7 +22,7 @@ class Customer {
 		return name;
 	};
 
-	public String statement() { 
+	public String statement() {   
 		double totalAmount = 0;
 		int frequentRenterPoints = 0;
 		Iterator<Rental> iterator = rentals.iterator();
