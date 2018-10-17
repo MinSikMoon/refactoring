@@ -3,10 +3,14 @@ package practice1;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.junit.runners.JUnit4;
 
 public class CustomerTest {
-
+	private static final int ONE_DAY = 1;
+	private static final int TWO_DAYS = 2;
+	private static final int FOUR_DAYS = 4;
+	String name = "NAME_NOT_IMPORTANT";
+	String title = "TITLE_NOT_IMPORTANT";
+	Customer customer = new Customer(name);
 	private static final int THREE_DAYS = 3;
 	public void test() {
 		// fail("Not yet implemented");
@@ -18,7 +22,7 @@ public class CustomerTest {
 	@Test
 	public void testInitCustomer() {
 		String name = null;
-		Customer customer = new Customer(name);
+		customer = new Customer(name);
 	}
 
 	// 2. 무엇을 타겟으로 잡을지 정한다.
@@ -29,7 +33,7 @@ public class CustomerTest {
 		// pre-condition
 		// Given
 		String name = null;
-		Customer customer = new Customer(name);
+		customer = new Customer(name);
 		// Act : 테스트 대상 함수를 호출
 		// when
 		String actualStatement = customer.statement();
@@ -51,9 +55,8 @@ public class CustomerTest {
 		// Arrange : 테스트 케이스 작성에 필요한 환경 구축
 		// pre-condition
 		// Given
-		String name = "NAME_NOT_IMPORTANT";
 		Movie movie = new Movie("hi", Movie.REGULAR); //getPriceCode보니까 이게 Movie거란걸 알았고, movie를 만들어줘야지
-		Customer customer = new Customer(name);
+		customer = new Customer(name);
 		Rental rental = new Rental(movie, 0);
 		customer.addRental(rental);
 		// Act : 테스트 대상 함수를 호출
@@ -78,7 +81,7 @@ public class CustomerTest {
 	public void test_RENTAL_THREEDAYS() {
 		String name = "NAME_NOT_IMPORTANT";
 		Movie movie = new Movie("hi", Movie.REGULAR); //getPriceCode보니까 이게 Movie거란걸 알았고, movie를 만들어줘야지
-		Customer customer = new Customer(name);
+		customer = new Customer(name);
 		Rental rental = new Rental(movie, THREE_DAYS);
 		customer.addRental(rental);
 		String actualStatement = customer.statement(); 
@@ -92,20 +95,107 @@ public class CustomerTest {
 	// 4. 무엇을 타겟으로 잡을지 정한다.
 	// pricecode를 해본다.
 	// 근데 rental, movie 만들고 customer에 넣어주는게 반복된다.
+	// ctrl 2 누르면 메소드 뺄수 있음.
+	// customer name, title은 반복되니까 위에 공동으로 쓰자
+	// 반복되는거 메소드로 빼자
 	@Test
 	public void test_x() {
-		String name = "NAME_NOT_IMPORTANT";
-		String title = "TITLE_NOT_IMPORTANT";
-		Movie movie = new Movie(title, Movie.REGULAR); //getPriceCode보니까 이게 Movie거란걸 알았고, movie를 만들어줘야지
-		Customer customer = new Customer(name);
-		Rental rental = new Rental(movie, THREE_DAYS);
-		customer.addRental(rental);
+	
+		setCustomer(Movie.NEW_RELEASE, THREE_DAYS);
 		String actualStatement = customer.statement(); 
 		
 		assertEquals("Rental Record for NAME_NOT_IMPORTANT\n" + 
-				"	3.5(hi)\n" + 
-				"Amount owed is 3.5\n" + 
+				"	9.0(TITLE_NOT_IMPORTANT)\n" + 
+				"Amount owed is 9.0\n" + 
+				"You earned 2 frequent renter pointers", actualStatement); 
+	}
+
+	// 4. 무엇을 타겟으로 잡을지 정한다.
+	// pricecode를 해본다.
+	// 근데 rental, movie 만들고 customer에 넣어주는게 반복된다.
+	// ctrl 2 누르면 메소드 뺄수 있음.
+	// customer name, title은 반복되니까 위에 공동으로 쓰자
+	// 반복되는거 메소드로 빼자
+	@Test
+	public void test_x1() {
+		
+		setCustomer(Movie.CHILDRENS, THREE_DAYS);
+		String actualStatement = customer.statement(); 
+		
+		assertEquals("Rental Record for NAME_NOT_IMPORTANT\n" + 
+				"	1.5(TITLE_NOT_IMPORTANT)\n" + 
+				"Amount owed is 1.5\n" + 
 				"You earned 1 frequent renter pointers", actualStatement); 
+	}
+	// 4. 무엇을 타겟으로 잡을지 정한다.
+	// pricecode를 해본다.
+	// 근데 rental, movie 만들고 customer에 넣어주는게 반복된다.
+	// ctrl 2 누르면 메소드 뺄수 있음.
+	// customer name, title은 반복되니까 위에 공동으로 쓰자
+	// 반복되는거 메소드로 빼자
+	@Test
+	public void test_x2() {
+		
+		setCustomer(Movie.CHILDRENS, FOUR_DAYS);
+		String actualStatement = customer.statement(); 
+		
+		assertEquals("Rental Record for NAME_NOT_IMPORTANT\n" + 
+				"	3.0(TITLE_NOT_IMPORTANT)\n" + 
+				"Amount owed is 3.0\n" + 
+				"You earned 1 frequent renter pointers", actualStatement); 
+	}
+	// 4. 무엇을 타겟으로 잡을지 정한다.
+	// pricecode를 해본다.
+	// 근데 rental, movie 만들고 customer에 넣어주는게 반복된다.
+	// ctrl 2 누르면 메소드 뺄수 있음.
+	// customer name, title은 반복되니까 위에 공동으로 쓰자
+	// 반복되는거 메소드로 빼자
+	@Test
+	public void test_x3() {
+		
+		setCustomer(Movie.NEW_RELEASE, TWO_DAYS);
+		String actualStatement = customer.statement(); 
+		
+		assertEquals("Rental Record for NAME_NOT_IMPORTANT\n" + 
+				"	6.0(TITLE_NOT_IMPORTANT)\n" + 
+				"Amount owed is 6.0\n" + 
+				"You earned 2 frequent renter pointers", actualStatement); 
+	}
+	@Test
+	public void test_x4() {
+		setCustomer(Movie.NEW_RELEASE, ONE_DAY);
+		String actualStatement = customer.statement(); 
+		
+		assertEquals("Rental Record for NAME_NOT_IMPORTANT\n" + 
+				"	3.0(TITLE_NOT_IMPORTANT)\n" + 
+				"Amount owed is 3.0\n" + 
+				"You earned 1 frequent renter pointers", actualStatement); 
+	}
+	@Test
+	public void test_x5() {
+		setCustomer(3, ONE_DAY);
+		String actualStatement = customer.statement(); 
+		
+		assertEquals("Rental Record for NAME_NOT_IMPORTANT\n" + 
+				"	0.0(TITLE_NOT_IMPORTANT)\n" + 
+				"Amount owed is 0.0\n" + 
+				"You earned 1 frequent renter pointers", actualStatement); 
+	}
+	@Test
+	public void test_x6() {
+		setCustomer(Movie.CHILDRENS, TWO_DAYS);
+		String actualStatement = customer.statement(); 
+		
+		assertEquals("Rental Record for NAME_NOT_IMPORTANT\n" + 
+				"	1.5(TITLE_NOT_IMPORTANT)\n" + 
+				"Amount owed is 1.5\n" + 
+				"You earned 1 frequent renter pointers", actualStatement); 
+	}
+	
+	private void setCustomer(int priceCode, int rentDays) {
+		Movie movie = new Movie(title, priceCode); //getPriceCode보니까 이게 Movie거란걸 알았고, movie를 만들어줘야지
+		Rental rental = new Rental(movie, rentDays);
+		customer.addRental(rental);
 	}
 	
 	
