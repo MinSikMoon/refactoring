@@ -24,8 +24,94 @@ public class HundredDoors {
 	// 1개의 문, 한번도 통과안한 상태가 가장 작은 모델일테지.
 	@Test 
 	public void one_door_no_pass() {
-		HunnitDoors doors = new HunnitDoors();
+		HunnitDoors doors = new HunnitDoors(1);
 		assertArrayEquals(new boolean[]{false}, doors.getState()); 
+	}
+	// 1개의 문 / 통과
+	@Test 
+	public void one_door_pass() {
+		//Arrange
+		HunnitDoors doors = new HunnitDoors(1);
+		doors.pass(); //통과함수 만들기
+		//Act
+		
+		//Assert
+		assertArrayEquals(new boolean[]{true}, doors.getState()); 
+	}
+	// 2개의 문 / 
+	@Test 
+	public void two_door() {
+		//Arrange
+		HunnitDoors doors = new HunnitDoors(2); //2개의 문을 어떻게 만들지? 생성자에 있어야 될듯.
+
+		//Act
+		
+		//Assert
+		assertArrayEquals(new boolean[]{false,false}, doors.getState()); 
+	}
+	// 2개의 문 / 1번 pass
+	@Test 
+	public void two_door_one_pass() {
+		//Arrange
+		HunnitDoors doors = new HunnitDoors(2); //2개의 문을 어떻게 만들지? 생성자에 있어야 될듯.
+		doors.pass();
+		//Act
+		
+		//Assert
+		assertArrayEquals(new boolean[]{true,true}, doors.getState()); 
+	}
+	// 2개의 문 / 2번 pass
+	@Test 
+	public void two_door_two_pass() {
+		//Arrange
+		HunnitDoors doors = new HunnitDoors(2); //2개의 문을 어떻게 만들지? 생성자에 있어야 될듯.
+		doors.pass();
+		doors.pass();
+		//Act 
+		
+		//Assert
+		assertArrayEquals(new boolean[]{true,false}, doors.getState()); 
+	}
+	// 3개의 문 / 2번 pass
+	@Test 
+	public void three_door_one_pass() {
+		//Arrange
+		HunnitDoors doors = new HunnitDoors(3); //2개의 문을 어떻게 만들지? 생성자에 있어야 될듯.
+		doors.pass(1);
+		//Act
+		
+		//Assert
+		assertArrayEquals(new boolean[]{true,true,true}, doors.getState()); 
+	}
+	@Test 
+	public void three_door_two_pass() {
+		//Arrange
+		HunnitDoors doors = new HunnitDoors(3); //2개의 문을 어떻게 만들지? 생성자에 있어야 될듯.
+		doors.pass(2);
+		//Act
+		
+		//Assert
+		assertArrayEquals(new boolean[]{true,false,true}, doors.getState()); 
+	}
+	@Test 
+	public void three_door_three_pass() {
+		//Arrange
+		HunnitDoors doors = new HunnitDoors(3); //2개의 문을 어떻게 만들지? 생성자에 있어야 될듯.
+		doors.pass(3);
+		//Act
+		
+		//Assert
+		assertArrayEquals(new boolean[]{true,false,false}, doors.getState()); 
+	}
+	@Test 
+	public void four_door_three_pass() {
+		//Arrange
+		HunnitDoors doors = new HunnitDoors(4); //2개의 문을 어떻게 만들지? 생성자에 있어야 될듯.
+		doors.pass(1);
+		//Act
+		
+		//Assert
+		assertArrayEquals(new boolean[]{true,true,true,true}, doors.getState()); 
 	}
 
 }
