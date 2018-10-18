@@ -24,8 +24,8 @@ public class HundredDoors {
 	// 1개의 문, 한번도 통과안한 상태가 가장 작은 모델일테지.
 	@Test 
 	public void one_door_no_pass() {
-		HunnitDoors doors = new Doors();
-		assertArrayEquals(new boolean[]{false}, doors.getState());
+		HunnitDoors doors = new HunnitDoors();
+		assertArrayEquals(new boolean[]{false}, doors.getState()); 
 	}
 
 }
